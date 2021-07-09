@@ -1,6 +1,5 @@
 #include <cstdio>
 using namespace std;
-
 int main() {
  	char c[14] = {"0123456789ABC"};
  	printf("#");
