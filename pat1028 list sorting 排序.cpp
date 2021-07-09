@@ -2,7 +2,7 @@
 #include<cstdio>
 #include<vector>
 #include<algorithm>
-//¿¼²ìsortº¯ÊýµÄÓ¦ÓÃ 
+//è€ƒå¯Ÿsortå‡½æ•°çš„åº”ç”¨ 
 using namespace std;
 struct student{
 	int id;
