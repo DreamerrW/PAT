@@ -7,28 +7,28 @@ struct studentinfo{
 	string id; 
 	int score, finalrank, location, localrank;
 };
-bool cmp(studentinfo a,studentinfo b){   //³É¼¨´Ó¸ßµ½µÍÅÅĞò 
+bool cmp(studentinfo a,studentinfo b){   //æˆç»©ä»é«˜åˆ°ä½æ’åº 
 	if(a.score!=b.score) return a.score>b.score;
 	else return a.id<b.id;
 }
 int main()
 { 
-	int N;   //N¸ö²âÊÔÎ»ÖÃµã 
-	int k;   //Ã¿¸ö²âÊÔµãk¸öÑ§Éú
+	int N;   //Nä¸ªæµ‹è¯•ä½ç½®ç‚¹ 
+	int k;   //æ¯ä¸ªæµ‹è¯•ç‚¹kä¸ªå­¦ç”Ÿ
 	vector<studentinfo> final;
 	scanf("%d",&N);
 	for(int i=1;i<=N;i++){
 		scanf("%d",&k);
-		vector<studentinfo> v(k);   //Ã¿¸ö²âÊÔµãk¸öÑ§Éú 
+		vector<studentinfo> v(k);   //æ¯ä¸ªæµ‹è¯•ç‚¹kä¸ªå­¦ç”Ÿ 
 		for(int j=0;j<k;j++){
-			cin>>v[j].id;            //Ñ§Éú 
-			scanf("%d",&v[j].score); //³É¼¨Â¼Èë 
-			v[j].location=i;         //¿¼³¡ĞÅÏ¢Â¼Èë 
+			cin>>v[j].id;            //å­¦ç”Ÿ 
+			scanf("%d",&v[j].score); //æˆç»©å½•å…¥ 
+			v[j].location=i;         //è€ƒåœºä¿¡æ¯å½•å…¥ 
 		}
 		sort(v.begin(),v.end(),cmp);
 		v[0].localrank=1;
 		final.push_back(v[0]);
-		for(int j=1;j<k;j++){       //¿¼³¡ÅÅÃûÂ¼Èë 
+		for(int j=1;j<k;j++){       //è€ƒåœºæ’åå½•å…¥
 			if(v[j].score==v[j-1].score)
 			v[j].localrank=v[j-1].localrank;
 			else v[j].localrank=j+1;
@@ -37,7 +37,7 @@ int main()
 	}
 	sort(final.begin(),final.end(),cmp);  
 	final[0].finalrank=1; 
-	for(int j=1;j<final.size();j++){   //ËùÓĞÑ§ÉúÅÅÃûÂ¼Èë 
+	for(int j=1;j<final.size();j++){   //æ‰€æœ‰å­¦ç”Ÿæ’åå½•å…¥ 
 		if(final[j].score==final[j-1].score)
 		final[j].finalrank=final[j-1].finalrank;
 		else final[j].finalrank=j+1;
