@@ -2,33 +2,33 @@
 #include<vector>
 #include<algorithm>
 #include<cmath>
-//Ã¿´ÎÈ¡³ö×î¿ìµÄÄÇÒ»ÕÅ×À×Ó£¬ÈôÊÇvip×À×Ó£¬Ôò¿¼ÂÇÓÃ»§ÊÇ²»ÊÇvipÓÃ»§£¬ÈôÊÇ£¬ÔòÖ±½ÓÊ¹ÓÃ£¬Èô²»ÊÇ£¬Ôò¿¼ÂÇÏÂ¸övipÓÃ»§À´ÕâÀïÄÜ²»ÄÜµÈµ½ 
-//Èô²»ÊÇvip×À×Ó£¬Ôò¿¼ÂÇÊÇ²»ÊÇvipÓÃ»§ £¬ÈôÊÇ£¬Ôò¿¼ÂÇ×îÔç½áÊøµÄÄÇÕÅvip×ÀÄÜ²»ÄÜÎªËü·şÎñ£¬Èô²»ÊÇ£¬ÔòÖ±½Ó·şÎñ
-//Òª×¢Òâµ±²»Ö¹Ò»ÕÅ×À×Ó¿ÕÏĞÊ±£¬ÒªÈ¡³ö×ÀºÅ×îĞ¡µÄÄÇÒ»ÕÅ 
-//roundº¯Êı ËÄÉáÎåÈëº¯Êı 
+//æ¯æ¬¡å–å‡ºæœ€å¿«çš„é‚£ä¸€å¼ æ¡Œå­ï¼Œè‹¥æ˜¯vipæ¡Œå­ï¼Œåˆ™è€ƒè™‘ç”¨æˆ·æ˜¯ä¸æ˜¯vipç”¨æˆ·ï¼Œè‹¥æ˜¯ï¼Œåˆ™ç›´æ¥ä½¿ç”¨ï¼Œè‹¥ä¸æ˜¯ï¼Œåˆ™è€ƒè™‘ä¸‹ä¸ªvipç”¨æˆ·æ¥è¿™é‡Œèƒ½ä¸èƒ½ç­‰çš„åˆ° 
+//è‹¥ä¸æ˜¯vipæ¡Œå­ï¼Œåˆ™è€ƒè™‘æ˜¯ä¸æ˜¯vipç”¨æˆ· ï¼Œè‹¥æ˜¯ï¼Œåˆ™è€ƒè™‘æœ€æ—©ç»“æŸçš„é‚£å¼ vipæ¡Œèƒ½ä¸èƒ½ä¸ºå®ƒæœåŠ¡ï¼Œè‹¥ä¸æ˜¯ï¼Œåˆ™ç›´æ¥æœåŠ¡
+//è¦æ³¨æ„å½“ä¸æ­¢ä¸€å¼ æ¡Œå­ç©ºé—²æ—¶ï¼Œè¦å–å‡ºæ¡Œå·æœ€å°çš„é‚£ä¸€å¼  
+//roundå‡½æ•° å››èˆäº”å…¥å‡½æ•° 
 using namespace std;
 struct playerinfo{
-	int hh,mm,ss;  //Ê±¼ä 
-	int arrive;   //µ½´ïÊ±¼äÃëÊı 
-	int p;     //ÓÃ»§Ê¹ÓÃ×À×ÓµÄÊ±¼ä   
-	int vip;  //ÊÇ·ñÊÇvip 
-	int serving; //¿ªÊ¼Ê¹ÓÃµÄÊ±¼ä 
+	int hh,mm,ss;  //æ—¶é—´ 
+	int arrive;   //åˆ°è¾¾æ—¶é—´ç§’æ•° 
+	int p;     //ç”¨æˆ·ä½¿ç”¨æ¡Œå­çš„æ—¶é—´   
+	int vip;  //æ˜¯å¦æ˜¯vip 
+	int serving; //å¼€å§‹ä½¿ç”¨çš„æ—¶é—´ 
 };
 struct tableinfo{ 
-	int num;    //ÕĞ´ı¹ıµÄÈËÊı 
+	int num;    //æ‹›å¾…è¿‡çš„äººæ•° 
 	int end=8*3600;
 	int vip;
 }; 
 vector<playerinfo> players;
 vector<tableinfo> tables;
 bool cmp1(playerinfo a,playerinfo b){
-	return a.arrive<b.arrive;        //°´µ½´ïÊ±¼äÅÅĞò 
+	return a.arrive<b.arrive;        //æŒ‰åˆ°è¾¾æ—¶é—´æ’åº 
 }
 bool cmp2(playerinfo a,playerinfo b){
 	return a.serving<b.serving;
 }
-void serving(int i,int minj){               //×îÔç½áÊøµÄÄÇ×ÀÀ´¸øÏÂÒ»¸öÓÃ»§·şÎñ 
-	if(players[i].arrive>=tables[minj].end)     //×îÔçµ½µÄÄÇ¸öÈËµ½Ê±ÒÑ¾­ÓĞ×À×Ó¿ÕÏĞÁË 
+void serving(int i,int minj){               //æœ€æ—©ç»“æŸçš„é‚£æ¡Œæ¥ç»™ä¸‹ä¸€ä¸ªç”¨æˆ·æœåŠ¡ 
+	if(players[i].arrive>=tables[minj].end)     //æœ€æ—©åˆ°çš„é‚£ä¸ªäººåˆ°æ—¶å·²ç»æœ‰æ¡Œå­ç©ºé—²äº† 
 		players[i].serving=players[i].arrive;
 	else 
 		players[i].serving=tables[minj].end;
@@ -43,57 +43,57 @@ int findnextvip(int vipid){
 int main()
 {
 	int k,m,n;
-	scanf("%d",&n);   //n¶ÔÓÃ»§   
-	playerinfo tempinfo;    //»º³åÊı¾İ 
+	scanf("%d",&n);   //nå¯¹ç”¨æˆ·   
+	playerinfo tempinfo;    //ç¼“å†²æ•°æ® 
 	for(int i=0;i<n;i++) {
 		scanf("%d:%d:%d %d %d",&tempinfo.hh,&tempinfo.mm,&tempinfo.ss,&tempinfo.p,&tempinfo.vip);
-		tempinfo.arrive=tempinfo.hh*3600+tempinfo.mm*60+tempinfo.ss;   //µ½´ïÊ±¼ä×ª»»³ÉÃëÊı
+		tempinfo.arrive=tempinfo.hh*3600+tempinfo.mm*60+tempinfo.ss;   //åˆ°è¾¾æ—¶é—´è½¬æ¢æˆç§’æ•°
 		tempinfo.serving = 21 * 3600; 
 		if(tempinfo.p>=120)   tempinfo.p=7200;    
-		else tempinfo.p=tempinfo.p*60;               //×ª»»³ÉÃëÊı 
-		if(tempinfo.arrive>=21*3600)  continue;     //ÈôÔÚ21µãºó²Åµ½£¬Âñ¶ª 
-		players.push_back(tempinfo);               //´æÈëÊı¾İ 
+		else tempinfo.p=tempinfo.p*60;               //è½¬æ¢æˆç§’æ•° 
+		if(tempinfo.arrive>=21*3600)  continue;     //è‹¥åœ¨21ç‚¹åæ‰åˆ°ï¼ŒåŸ‹ä¸¢ 
+		players.push_back(tempinfo);               //å­˜å…¥æ•°æ® 
 	}
-	scanf("%d %d",&k,&m);     //kÕÅ×À×Ó 
+	scanf("%d %d",&k,&m);     //kå¼ æ¡Œå­ 
 	int viptable;
 	tables.resize(k+1);
-	for(int i=0;i<m;i++){    //mÕÅvip×À×Ó 
+	for(int i=0;i<m;i++){    //må¼ vipæ¡Œå­ 
 		scanf("%d",&viptable);
 		tables[viptable].vip=1;
 	}
-	sort(players.begin(),players.end(),cmp1);   //ÏÈ°´ÕÕµ½´ïÊ±¼ä½øĞĞÅÅĞò 
+	sort(players.begin(),players.end(),cmp1);   //å…ˆæŒ‰ç…§åˆ°è¾¾æ—¶é—´è¿›è¡Œæ’åº 
 	int i=0,vipid=-1;
     vipid=findnextvip(vipid);
 	while(i<players.size()){
-		int minend=9999999,minj=-1,firstfree=-1;    //×îÔç½áÊøµÄÄÇ×À¶ÔÓ¦µÄ×ÀºÅ 
+		int minend=9999999,minj=-1,firstfree=-1;    //æœ€æ—©ç»“æŸçš„é‚£æ¡Œå¯¹åº”çš„æ¡Œå· 
 		for(int j=1;j<tables.size();j++){
 			if(tables[j].end<minend){
 				minend=tables[j].end;
 				minj=j;
 			}
 		}
-		for(int j=1;j<tables.size();j++){         //ÕÒµ½µ±Ç°¿ÕÏĞÇÒ×ÀºÅ×îĞ¡µÄÄÇÒ»ÕÅ 
+		for(int j=1;j<tables.size();j++){         //æ‰¾åˆ°å½“å‰ç©ºé—²ä¸”æ¡Œå·æœ€å°çš„é‚£ä¸€å¼  
 			if(players[i].arrive>tables[j].end){
 			firstfree=j;
 			break;
 			}
 		}
-		if(firstfree!=-1)      //¼ÙÈôÄÜÕÒµÄµ½£¬¼´ÓÃ»§À´µ½Ê±³ıÁË×îÔç½áÊøÄÇ×À½áÊøÁË£¬»¹ÓĞÆäËû×À½áÊøÁË£¬ÇÒÕâ×ÀĞòºÅ±Èµ±Ç°Õâ×ÀÒªĞ¡ 
+		if(firstfree!=-1)      //å‡è‹¥èƒ½æ‰¾çš„åˆ°ï¼Œå³ç”¨æˆ·æ¥åˆ°æ—¶é™¤äº†æœ€æ—©ç»“æŸé‚£æ¡Œç»“æŸäº†ï¼Œè¿˜æœ‰å…¶ä»–æ¡Œç»“æŸäº†ï¼Œä¸”è¿™æ¡Œåºå·æ¯”å½“å‰è¿™æ¡Œè¦å° 
 		minj=firstfree;
-		if(tables[minj].end >= 21*3600) break;  //ËùÓĞ×À×ÓµÄ×îÔç½áÊøÊ±¼ä¶¼´óÓÚ21µãÁË 
+		if(tables[minj].end >= 21*3600) break;  //æ‰€æœ‰æ¡Œå­çš„æœ€æ—©ç»“æŸæ—¶é—´éƒ½å¤§äº21ç‚¹äº† 
 		if(players[i].vip == 1 && i < vipid) {
  		i++;
  		continue;
 		}
-		if(tables[minj].vip==1){                           //Èô¸Ã×ÀÊÇvip×À×Ó            
-			if(players[i].vip==1){                        //Èôµ±Ç°ÓÃ»§Ò²ÊÇvip 
-				serving(i,minj);                         //¸øµ±Ç°ÓÃ»§·şÎñ 
+		if(tables[minj].vip==1){                           //è‹¥è¯¥æ¡Œæ˜¯vipæ¡Œå­            
+			if(players[i].vip==1){                        //è‹¥å½“å‰ç”¨æˆ·ä¹Ÿæ˜¯vip 
+				serving(i,minj);                         //ç»™å½“å‰ç”¨æˆ·æœåŠ¡ 
 				if(vipid==i)  vipid=findnextvip(vipid);
 				i++;
 			}	
-			else{                                       //Èôµ±Ç°ÓÃ»§²»ÊÇvip 
-				if(vipid<players.size()&&players[vipid].arrive<=tables[minj].end){   //ÏÂÒ»¸övipÓÃ»§µÄµ½´ïÊ±¼äĞ¡ÓÚµ±Ç°Õâ×ÀµÄ½áÊøÊ±¼ä 
-				 	serving(vipid, minj);              //Õâ×ÀÎªÎ´À´µÄvipÓÃ»§·şÎñ£»
+			else{                                       //è‹¥å½“å‰ç”¨æˆ·ä¸æ˜¯vip 
+				if(vipid<players.size()&&players[vipid].arrive<=tables[minj].end){   //ä¸‹ä¸€ä¸ªvipç”¨æˆ·çš„åˆ°è¾¾æ—¶é—´å°äºå½“å‰è¿™æ¡Œçš„ç»“æŸæ—¶é—´ 
+				 	serving(vipid, minj);              //è¿™æ¡Œä¸ºæœªæ¥çš„vipç”¨æˆ·æœåŠ¡ï¼›
 					vipid=findnextvip(vipid);
 				}
 				else{
@@ -102,25 +102,25 @@ int main()
 				}	
 			}
 		}
-		else{             //Èô¸Ã×À²»ÊÇvip×À×Ó 
-			if(players[i].vip==0){   //ÈôÓÃ»§²»ÊÇvip
+		else{             //è‹¥è¯¥æ¡Œä¸æ˜¯vipæ¡Œå­ 
+			if(players[i].vip==0){   //è‹¥ç”¨æˆ·ä¸æ˜¯vip
 				serving(i,minj);
 				i++; 
 			}
-			else{                     //ÈôÓÃ»§ÊÇvip,ÔòĞèÒª¿¼ÂÇ
+			else{                     //è‹¥ç”¨æˆ·æ˜¯vip,åˆ™éœ€è¦è€ƒè™‘
 				int minvipend=999999,minvip=-1; 
-				for(int j=1;j<tables.size();j++){      //É¸Ñ¡³ö×î¿ì½áÊøµÄÄÇÕÅvip×À×Ó 
+				for(int j=1;j<tables.size();j++){      //ç­›é€‰å‡ºæœ€å¿«ç»“æŸçš„é‚£å¼ vipæ¡Œå­ 
 					if(tables[j].end<minvipend&&tables[j].vip==1){
 						minvipend=tables[j].end;
 						minvip=j;
 					}
 				}
-				if(minvip!=-1&&players[i].arrive>=tables[minvip].end){  //Èô×î¿ì½áÊøµÄÄÇÕÅvip×À×ÓÄÜÂú×ãvipÓÃ»§ 
+				if(minvip!=-1&&players[i].arrive>=tables[minvip].end){  //è‹¥æœ€å¿«ç»“æŸçš„é‚£å¼ vipæ¡Œå­èƒ½æ»¡è¶³vipç”¨æˆ· 
 					serving(i,minvip);
 					if(vipid == i) vipid=findnextvip(vipid);
 					i++;
 				} 
-				else{                                                   //Èô²»ÄÜ£¬¾ÍÓÃÆÕÍ¨×À×Ó°É 
+				else{                                                   //è‹¥ä¸èƒ½ï¼Œå°±ç”¨æ™®é€šæ¡Œå­å§ 
 					serving(i,minj);
 					if(vipid == i) vipid=findnextvip(vipid);
 					i++;
