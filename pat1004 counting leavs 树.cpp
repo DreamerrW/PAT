@@ -9,13 +9,13 @@ typedef struct{
 	//int parent;
 }Tnode;
 
-Tnode node[maxsize]={0};   	//	³õÊ¼»¯100¸ö½áµã 
+Tnode node[maxsize]={0};   	//åˆå§‹åŒ–100ä¸ªç»“ç‚¹ 
 
 int main()
 {
 	int n,m;
 	int root,k;
-	int son;    //º¢×Ó 
+	int son;    //å­©å­ 
 	int temp;
 	node[1].layer=1;
 
@@ -28,13 +28,13 @@ int main()
 		for(int j=0;j<k;j++)
 		{
 			scanf("%d",&son);
-			node[root].child[j]=son;				//¸øµ±Ç°½ÚµãÕÒº¢×Ó 
-			//node[son].layer=node[root].layer+1;     //µ±Ç°½ÚµãµÄº¢×ÓµÄ²ãÊı¼Ó1 
-			node[root].childs++;					//º¢×ÓÊıÄ¿++ 
+			node[root].child[j]=son;				//ç»™å½“å‰èŠ‚ç‚¹æ‰¾å­©å­ 
+			//node[son].layer=node[root].layer+1;     //å½“å‰èŠ‚ç‚¹çš„å­©å­çš„å±‚æ•°åŠ 1 
+			node[root].childs++;					//å­©å­æ•°ç›®++ 
 		}	
 	}
 	
-	for(int i=1;i<maxsize;i++)  //¸øÃ¿Ò»¸ö½ÚµãÈ·¶¨ËüµÄ²ãÊı
+	for(int i=1;i<maxsize;i++)  //ç»™æ¯ä¸€ä¸ªèŠ‚ç‚¹ç¡®å®šå®ƒçš„å±‚æ•°
 	{
 		for(int j=0;j<maxsize;j++)
 		{
