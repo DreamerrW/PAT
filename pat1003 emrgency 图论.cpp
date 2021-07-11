@@ -1,28 +1,28 @@
 #include <stdio.h>
 //#include<stdbool.h>
 
-#define maxv 510          //¶¥µã×î´óÖµ 
-#define INF 100000  //ÎŞÇî´ó 
+#define maxv 510          //é¡¶ç‚¹æœ€å¤§å€¼ 
+#define INF 100000        //æ— ç©·å¤§ 
 
 typedef struct{
-//	int v[maxv];	    //¶¥µã±í 
-int e[maxv][maxv];      //ÁÚ½Ó¾ØÕó 
-int weight[maxv];      	//¶¥µãÈ¨Öµ,¼´Ã¿¸ö³ÇÊĞ¾È»ğ¶ÓÊıÄ¿ 
+//	int v[maxv];	    //é¡¶ç‚¹è¡¨ 
+int e[maxv][maxv];      //é‚»æ¥çŸ©é˜µ 
+int weight[maxv];      	//é¡¶ç‚¹æƒå€¼,å³æ¯ä¸ªåŸå¸‚æ•‘ç«é˜Ÿæ•°ç›® 
 }Mgraph;
-Mgraph G;                      //¶¨ÒåÒ»¸öÍ¼ 
+Mgraph G;                      //å®šä¹‰ä¸€ä¸ªå›¾ 
 
 
-int n,m,c1,c2;                 //ÊäÈë£¬n¸ö³ÇÊĞ£¬mÌõÂ·£¬c1Æğµã£¬c2ÖÕµã 
+int n,m,c1,c2;                 //è¾“å…¥ï¼Œnä¸ªåŸå¸‚ï¼Œmæ¡è·¯ï¼Œc1èµ·ç‚¹ï¼Œc2ç»ˆç‚¹ 
 
-bool visited[maxv]={false};    //ÊÇ·ñ·ÃÎÊ³õÊ¼Îª·ñ 
-int distance[maxv];     	   //Æğµãµ½ÈÎÒâÒ»µã×î¶Ì¾àÀë 
+bool visited[maxv]={false};    //æ˜¯å¦è®¿é—®åˆå§‹ä¸ºå¦ 
+int distance[maxv];     	   //èµ·ç‚¹åˆ°ä»»æ„ä¸€ç‚¹æœ€çŸ­è·ç¦» 
 int num[maxv]={0};
-int w[maxv]={0}; 			   //Æğµãµ½ÈÎÒâÒ»µã×î¶ÌÂ·¾¶ÊıÄ¿,ºÍ×î´óµÄ¾È»ğ¶ÓÖ®ºÍÊıÄ¿ 
+int w[maxv]={0}; 			   //èµ·ç‚¹åˆ°ä»»æ„ä¸€ç‚¹æœ€çŸ­è·¯å¾„æ•°ç›®,å’Œæœ€å¤§çš„æ•‘ç«é˜Ÿä¹‹å’Œæ•°ç›® 
 
 void dijkstra(int s)
 {
-	distance[s]=0;  		  //ÆğµãÓë×Ô¼ºµÄ¾àÀëÊÇ0 
-	w[s]=G.weight[s]; 		  //ÆğµãµÄ¾È»ğ¶ÓÊıÄ¿  
+	distance[s]=0;  		  //èµ·ç‚¹ä¸è‡ªå·±çš„è·ç¦»æ˜¯0 
+	w[s]=G.weight[s]; 		  //èµ·ç‚¹çš„æ•‘ç«é˜Ÿæ•°ç›®  
 	num[s]=1;     			   
 	for(int i=0;i<n;i++)
 	{
@@ -35,23 +35,23 @@ void dijkstra(int s)
 				MIN=distance[j];
 			}
 		}
-		//ÕÒ²»µ½Ğ¡ÓÚINFµÄd[u]£¬ËµÃ÷Ê£ÏÂµÄ¶¥µãºÍÆğµãs²»Á¬Í¨ 
+		//æ‰¾ä¸åˆ°å°äºINFçš„d[u]ï¼Œè¯´æ˜å‰©ä¸‹çš„é¡¶ç‚¹å’Œèµ·ç‚¹sä¸è¿é€š 
 		if(u==-1) return; 
-		visited[u]=true;		//±ê¼ÇuÎªÒÑ·ÃÎÊ
+		visited[u]=true;		//æ ‡è®°uä¸ºå·²è®¿é—®
 		for(int v=0;v<n;v++)		//
 		{
-			if(visited[v]==false&&G.e[u][v]!=INF)       //Èç¹ûvÎ´·ÃÎÊ&&uÄÜµ½´ïv 
+			if(visited[v]==false&&G.e[u][v]!=INF)       //å¦‚æœvæœªè®¿é—®&&uèƒ½åˆ°è¾¾v 
 			{
-				if(distance[u]+G.e[u][v]<distance[v])   //ÒÔuÎªÖĞ½éµãµÄÊ±ºòÄÜÊ¹dis[v]¸üĞ¡ 
+				if(distance[u]+G.e[u][v]<distance[v])   //ä»¥uä¸ºä¸­ä»‹ç‚¹çš„æ—¶å€™èƒ½ä½¿dis[v]æ›´å° 
 				{
-					distance[v]=distance[u]+G.e[u][v];  //¸üĞÂdis[v] 
-					w[v]=w[u]+G.weight[v];				//¸üĞÂw[v] 
-					num[v]=num[u];						//¼Ì³Ğnum[v] 
+					distance[v]=distance[u]+G.e[u][v];  //æ›´æ–°dis[v] 
+					w[v]=w[u]+G.weight[v];				//æ›´æ–°w[v] 
+					num[v]=num[u];						//ç»§æ‰¿num[v] 
 				}
-				else if(distance[u]+G.e[u][v]==distance[v]) //ÕÒµ½Ò»ÌõÏàµÈµÄÂ·¾¶ 
+				else if(distance[u]+G.e[u][v]==distance[v]) //æ‰¾åˆ°ä¸€æ¡ç›¸ç­‰çš„è·¯å¾„ 
 				{
-					num[v]=num[v]+num[u];              //Ô­±¾vµÄÂ·¾¶ÌõÊı¼ÓÉÏÒÔuÎªÖĞ½é´øÀ´µÄÂ·¾¶ÌõÊı 
-					if(w[u]+G.weight[v]>w[v])		  //ÈôÒÔuÎªÖĞ½éÈ¨Öµ¸ü´ó£¬Ôò¸üĞÂ 
+					num[v]=num[v]+num[u];              //åŸæœ¬vçš„è·¯å¾„æ¡æ•°åŠ ä¸Šä»¥uä¸ºä¸­ä»‹å¸¦æ¥çš„è·¯å¾„æ¡æ•° 
+					if(w[u]+G.weight[v]>w[v])		  //è‹¥ä»¥uä¸ºä¸­ä»‹æƒå€¼æ›´å¤§ï¼Œåˆ™æ›´æ–° 
 						w[v]=w[u]+G.weight[v];
 				}
 			}
@@ -65,20 +65,20 @@ int main()
 	
 	for(int i=0;i<n;i++)
 	{
-		scanf("%d",&G.weight[i]);   //¶ÁÈë¸÷¸ö³ÇÊĞÈ¨Öµ£¬¼´¾È»ğ¶ÓÊıÄ¿		
+		scanf("%d",&G.weight[i]);   //è¯»å…¥å„ä¸ªåŸå¸‚æƒå€¼ï¼Œå³æ•‘ç«é˜Ÿæ•°ç›®		
 	}
 	
-	for(int i=0;i<n;i++)	{	//³õÊ¼»¯distanceÊı×é		
+	for(int i=0;i<n;i++)	{	//åˆå§‹åŒ–distanceæ•°ç»„		
 		distance[i]=INF;
-		for(int j=0;j<n;j++)	//³õÊ¼»¯±ßÈ¨ 
+		for(int j=0;j<n;j++)	//åˆå§‹åŒ–è¾¹æƒ 
 			G.e[i][j]=INF;
 	}
 	int u,v;                         
 	for(int i=0;i<m;i++)
 	{
-		scanf("%d %d",&u,&v);       //¶ÁÈë±ßÈ¨ 
+		scanf("%d %d",&u,&v);       //è¯»å…¥è¾¹æƒ 
 		scanf("%d",&G.e[u][v]);
-		G.e[v][u]=G.e[u][v];       //ÎŞÏòÍ¼ 
+		G.e[v][u]=G.e[u][v];       //æ— å‘å›¾ 
 	}
 	dijkstra(c1);
 	printf("%d %d\n",num[c2],w[c2]);
